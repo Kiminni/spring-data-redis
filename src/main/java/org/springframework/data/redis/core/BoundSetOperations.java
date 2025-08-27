@@ -114,6 +114,50 @@ public interface BoundSetOperations<K, V> extends BoundKeyOperations<K> {
 	Set<@NonNull V> intersect(@NonNull Collection<@NonNull K> keys);
 
 	/**
+	 * Returns the cardinality of the set which would result from the intersection of the bound key and {@code key}.
+	 *
+	 * @param key must not be {@literal null}.
+	 * @return {@literal null} when used in pipeline / transaction.
+	 * @see <a href="https://redis.io/commands/sintercard">Redis Documentation: SINTERCARD</a>
+	 * @since 4.0
+	 */
+	Long intersectCard(@NonNull K key);
+
+	/**
+	 * Returns the cardinality of the set which would result from the intersection of the bound key and {@code keys}.
+	 *
+	 * @param keys must not be {@literal null}.
+	 * @return {@literal null} when used in pipeline / transaction.
+	 * @see <a href="https://redis.io/commands/sintercard">Redis Documentation: SINTERCARD</a>
+	 * @since 4.0
+	 */
+	Long intersectCard(@NonNull Collection<@NonNull K> keys);
+
+	/**
+	 * Returns the cardinality of the set which would result from the intersection of the bound key and {@code key}.
+	 * If the intersection cardinality reaches {@code limit} partway through the computation, the algorithm will exit and yield {@code limit} as the cardinality.
+	 *
+	 * @param key must not be {@literal null}.
+	 * @param limit the maximum cardinality to compute before exiting early.
+	 * @return {@literal null} when used in pipeline / transaction.
+	 * @see <a href="https://redis.io/commands/sintercard">Redis Documentation: SINTERCARD</a>
+	 * @since 4.0
+	 */
+	Long intersectCard(@NonNull K key, long limit);
+
+	/**
+	 * Returns the cardinality of the set which would result from the intersection of the bound key and {@code keys}.
+	 * If the intersection cardinality reaches {@code limit} partway through the computation, the algorithm will exit and yield {@code limit} as the cardinality.
+	 *
+	 * @param keys must not be {@literal null}.
+	 * @param limit the maximum cardinality to compute before exiting early.
+	 * @return {@literal null} when used in pipeline / transaction.
+	 * @see <a href="https://redis.io/commands/sintercard">Redis Documentation: SINTERCARD</a>
+	 * @since 4.0
+	 */
+	Long intersectCard(@NonNull Collection<@NonNull K> keys, long limit);
+
+	/**
 	 * Intersect all given sets at the bound key and {@code key} and store result in {@code destKey}.
 	 *
 	 * @param key must not be {@literal null}.

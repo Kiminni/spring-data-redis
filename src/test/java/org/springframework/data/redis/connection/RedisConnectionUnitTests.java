@@ -138,6 +138,16 @@ class RedisConnectionUnitTests {
 		}
 
 		@Override
+		public Long sInterCard(byte[]... keys) {
+			return null;
+		}
+
+		@Override
+		public Long sInterCard(long limit, byte[]... keys) {
+			return null;
+		}
+
+		@Override
 		public RedisScriptingCommands scriptingCommands() {
 			return null;
 		}

@@ -1159,6 +1159,30 @@ public interface StringRedisConnection extends RedisConnection {
 	Set<String> sInter(@NonNull String @NonNull... keys);
 
 	/**
+	 * Returns the cardinality of the set which would result from the intersection of all the given sets.
+	 *
+	 * @param keys must not be {@literal null}.
+	 * @return
+	 * @see <a href="https://redis.io/commands/sintercard">Redis Documentation: SINTERCARD</a>
+	 * @see RedisSetCommands#sInterCard(byte[]...)
+	 * @since 4.0
+	 */
+	Long sInterCard(@NonNull String @NonNull... keys);
+
+	/**
+	 * Returns the cardinality of the set which would result from the intersection of all the given sets.
+	 * If the intersection cardinality reaches {@code limit} partway through the computation, the algorithm will exit and yield {@code limit} as the cardinality.
+	 *
+	 * @param limit the maximum cardinality to compute before exiting early.
+	 * @param keys must not be {@literal null}.
+	 * @return
+	 * @see <a href="https://redis.io/commands/sintercard">Redis Documentation: SINTERCARD</a>
+	 * @see RedisSetCommands#sInterCard(long, byte[]...)
+	 * @since 4.0
+	 */
+	Long sInterCard(long limit, @NonNull String @NonNull... keys);
+
+	/**
 	 * Intersect all given sets at {@code keys} and store result in {@code destKey}.
 	 *
 	 * @param destKey must not be {@literal null}.

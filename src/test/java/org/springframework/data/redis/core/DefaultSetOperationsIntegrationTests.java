@@ -347,4 +347,132 @@ public class DefaultSetOperationsIntegrationTests<K, V> {
 		assertThat(setOps.isMember(key, v1, v2, v3, v4)).containsEntry(v1, true).containsEntry(v2, true)
 				.containsEntry(v3, true).containsEntry(v4, false);
 	}
+
+	@Test // GH-2906
+	void testIntersectCard() {
+
+		K sourceKey1 = keyFactory.instance();
+		K sourceKey2 = keyFactory.instance();
+
+		V v1 = valueFactory.instance();
+		V v2 = valueFactory.instance();
+		V v3 = valueFactory.instance();
+		V v4 = valueFactory.instance();
+
+		setOps.add(sourceKey1, v1, v2, v3);
+		setOps.add(sourceKey2, v2, v3, v4);
+
+		assertThat(setOps.intersectCard(Arrays.asList(sourceKey1, sourceKey2))).isEqualTo(2L);
+	}
+
+	@Test // GH-2906
+	void testIntersectCardWithLimit() {
+
+		K sourceKey1 = keyFactory.instance();
+		K sourceKey2 = keyFactory.instance();
+
+		V v1 = valueFactory.instance();
+		V v2 = valueFactory.instance();
+		V v3 = valueFactory.instance();
+		V v4 = valueFactory.instance();
+
+		setOps.add(sourceKey1, v1, v2, v3);
+		setOps.add(sourceKey2, v2, v3, v4);
+
+		assertThat(setOps.intersectCard(Arrays.asList(sourceKey1, sourceKey2), 1L)).isEqualTo(1L);
+	}
+
+	@Test // GH-2906
+	void testIntersectCardTwoKeys() {
+
+		K sourceKey1 = keyFactory.instance();
+		K sourceKey2 = keyFactory.instance();
+
+		V v1 = valueFactory.instance();
+		V v2 = valueFactory.instance();
+		V v3 = valueFactory.instance();
+
+		setOps.add(sourceKey1, v1, v2, v3);
+		setOps.add(sourceKey2, v2, v3);
+
+		assertThat(setOps.intersectCard(sourceKey1, sourceKey2)).isEqualTo(2L);
+	}
+
+	@Test // GH-2906
+	void testIntersectCardKeyAndCollection() {
+
+		K sourceKey1 = keyFactory.instance();
+		K sourceKey2 = keyFactory.instance();
+		K sourceKey3 = keyFactory.instance();
+
+		V v1 = valueFactory.instance();
+		V v2 = valueFactory.instance();
+		V v3 = valueFactory.instance();
+		V v4 = valueFactory.instance();
+
+		setOps.add(sourceKey1, v1, v2, v3);
+		setOps.add(sourceKey2, v2, v3);
+		setOps.add(sourceKey3, v3, v4);
+
+		assertThat(setOps.intersectCard(sourceKey1, Arrays.asList(sourceKey2, sourceKey3))).isEqualTo(1L);
+	}
+
+	@Test // GH-2906
+	void testIntersectCardWithLimitTwoKeys() {
+
+		K sourceKey1 = keyFactory.instance();
+		K sourceKey2 = keyFactory.instance();
+
+		V v1 = valueFactory.instance();
+		V v2 = valueFactory.instance();
+		V v3 = valueFactory.instance();
+
+		setOps.add(sourceKey1, v1, v2, v3);
+		setOps.add(sourceKey2, v2, v3);
+
+		assertThat(setOps.intersectCard(sourceKey1, sourceKey2, 1L)).isEqualTo(1L);
+	}
+
+	@Test // GH-2906
+	void testIntersectCardWithLimitKeyAndCollection() {
+
+		K sourceKey1 = keyFactory.instance();
+		K sourceKey2 = keyFactory.instance();
+		K sourceKey3 = keyFactory.instance();
+
+		V v1 = valueFactory.instance();
+		V v2 = valueFactory.instance();
+		V v3 = valueFactory.instance();
+		V v4 = valueFactory.instance();
+
+		setOps.add(sourceKey1, v1, v2, v3);
+		setOps.add(sourceKey2, v2, v3);
+		setOps.add(sourceKey3, v3, v4);
+
+		assertThat(setOps.intersectCard(sourceKey1, Arrays.asList(sourceKey2, sourceKey3), 1L)).isEqualTo(1L);
+	}
+
+	@Test // GH-2906
+	void testIntersectCardEmptySets() {
+
+		K sourceKey1 = keyFactory.instance();
+		K sourceKey2 = keyFactory.instance();
+
+		assertThat(setOps.intersectCard(Arrays.asList(sourceKey1, sourceKey2))).isEqualTo(0L);
+	}
+
+	@Test // GH-2906
+	void testIntersectCardNoIntersection() {
+
+		K sourceKey1 = keyFactory.instance();
+		K sourceKey2 = keyFactory.instance();
+
+		V v1 = valueFactory.instance();
+		V v2 = valueFactory.instance();
+
+		setOps.add(sourceKey1, v1);
+		setOps.add(sourceKey2, v2);
+
+		assertThat(setOps.intersectCard(Arrays.asList(sourceKey1, sourceKey2))).isEqualTo(0L);
+	}
 }

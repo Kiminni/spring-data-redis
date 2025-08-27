@@ -144,6 +144,28 @@ public interface RedisSetCommands {
 	Set<byte @NonNull []> sInter(byte @NonNull [] @NonNull... keys);
 
 	/**
+	 * Returns the cardinality of the set which would result from the intersection of all the given sets.
+	 *
+	 * @param keys must not be {@literal null}.
+	 * @return {@literal null} when used in pipeline / transaction.
+	 * @see <a href="https://redis.io/commands/sintercard">Redis Documentation: SINTERCARD</a>
+	 * @since 4.0
+	 */
+	Long sInterCard(byte @NonNull [] @NonNull... keys);
+
+	/**
+	 * Returns the cardinality of the set which would result from the intersection of all the given sets.
+	 * If the intersection cardinality reaches {@code limit} partway through the computation, the algorithm will exit and yield {@code limit} as the cardinality.
+	 *
+	 * @param limit the maximum cardinality to compute before exiting early.
+	 * @param keys must not be {@literal null}.
+	 * @return {@literal null} when used in pipeline / transaction.
+	 * @see <a href="https://redis.io/commands/sintercard">Redis Documentation: SINTERCARD</a>
+	 * @since 4.0
+	 */
+	Long sInterCard(long limit, byte @NonNull [] @NonNull... keys);
+
+	/**
 	 * Intersect all given sets at {@code keys} and store result in {@code destKey}.
 	 *
 	 * @param destKey must not be {@literal null}.

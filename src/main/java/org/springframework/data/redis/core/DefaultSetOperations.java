@@ -15,6 +15,7 @@
  */
 package org.springframework.data.redis.core;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
@@ -115,6 +116,49 @@ class DefaultSetOperations<K, V> extends AbstractOperations<K, V> implements Set
 		Set<byte[]> rawValues = execute(connection -> connection.sInter(rawKeys));
 
 		return deserializeValues(rawValues);
+	}
+
+	@Override
+	public Long intersectCard(K key, K otherKey) {
+		return intersectCard(Arrays.asList(key, otherKey));
+	}
+
+	@Override
+	public Long intersectCard(K key, Collection<K> otherKeys) {
+		Collection<K> allKeys = new ArrayList<>();
+		allKeys.add(key);
+		allKeys.addAll(otherKeys);
+		return intersectCard(allKeys);
+	}
+
+	@Override
+	public Long intersectCard(Collection<K> keys) {
+
+		byte[][] rawKeys = rawKeys(keys);
+		return execute(connection -> connection.sInterCard(rawKeys));
+	}
+
+	@Override
+	public Long intersectCard(K key, K otherKey, long limit) {
+		Collection<K> allKeys = new ArrayList<>();
+		allKeys.add(key);
+		allKeys.add(otherKey);
+		return intersectCard(allKeys, limit);
+	}
+
+	@Override
+	public Long intersectCard(K key, Collection<K> otherKeys, long limit) {
+		Collection<K> allKeys = new ArrayList<>();
+		allKeys.add(key);
+		allKeys.addAll(otherKeys);
+		return intersectCard(allKeys, limit);
+	}
+
+	@Override
+	public Long intersectCard(Collection<K> keys, long limit) {
+
+		byte[][] rawKeys = rawKeys(keys);
+		return execute(connection -> connection.sInterCard(limit, rawKeys));
 	}
 
 	@Override

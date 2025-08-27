@@ -828,6 +828,16 @@ public class DefaultStringRedisConnection implements StringRedisConnection, Deco
 	}
 
 	@Override
+	public Long sInterCard(byte[]... keys) {
+		return convertAndReturn(delegate.sInterCard(keys), Converters.identityConverter());
+	}
+
+	@Override
+	public Long sInterCard(long limit, byte[]... keys) {
+		return convertAndReturn(delegate.sInterCard(limit, keys), Converters.identityConverter());
+	}
+
+	@Override
 	public Long sInterStore(byte[] destKey, byte[]... keys) {
 		return convertAndReturn(delegate.sInterStore(destKey, keys), Converters.identityConverter());
 	}
@@ -1817,6 +1827,16 @@ public class DefaultStringRedisConnection implements StringRedisConnection, Deco
 	@Override
 	public Set<String> sInter(String... keys) {
 		return convertAndReturn(delegate.sInter(serializeMulti(keys)), byteSetToStringSet);
+	}
+
+	@Override
+	public Long sInterCard(String... keys) {
+		return convertAndReturn(delegate.sInterCard(serializeMulti(keys)), Converters.identityConverter());
+	}
+
+	@Override
+	public Long sInterCard(long limit, String... keys) {
+		return convertAndReturn(delegate.sInterCard(limit, serializeMulti(keys)), Converters.identityConverter());
 	}
 
 	@Override

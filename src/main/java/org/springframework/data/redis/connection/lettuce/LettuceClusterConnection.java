@@ -255,6 +255,16 @@ public class LettuceClusterConnection extends LettuceConnection
 	}
 
 	@Override
+	public Long sInterCard(byte[]... keys) {
+		return setCommands.sInterCard(keys);
+	}
+
+	@Override
+	public Long sInterCard(long limit, byte[]... keys) {
+		return setCommands.sInterCard(limit, keys);
+	}
+
+	@Override
 	public RedisClusterServerCommands serverCommands() {
 		return serverCommands;
 	}

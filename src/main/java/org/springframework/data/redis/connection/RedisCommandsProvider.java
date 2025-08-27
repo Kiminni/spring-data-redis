@@ -23,99 +23,99 @@ package org.springframework.data.redis.connection;
  */
 public interface RedisCommandsProvider {
 
-	/**
-	 * Get {@link RedisCommands}.
-	 *
-	 * @return never {@literal null}.
-	 * @since 3.0
-	 */
-	RedisCommands commands();
+  /**
+   * Get {@link RedisCommands}.
+   *
+   * @return never {@literal null}.
+   * @since 3.0
+   */
+  RedisCommands commands();
 
-	/**
-	 * Get {@link RedisGeoCommands}.
-	 *
-	 * @return never {@literal null}.
-	 * @since 2.0
-	 */
-	RedisGeoCommands geoCommands();
+  /**
+   * Get {@link RedisGeoCommands}.
+   *
+   * @return never {@literal null}.
+   * @since 2.0
+   */
+  RedisGeoCommands geoCommands();
 
-	/**
-	 * Get {@link RedisHashCommands}.
-	 *
-	 * @return never {@literal null}.
-	 * @since 2.0
-	 */
-	RedisHashCommands hashCommands();
+  /**
+   * Get {@link RedisHashCommands}.
+   *
+   * @return never {@literal null}.
+   * @since 2.0
+   */
+  RedisHashCommands hashCommands();
 
-	/**
-	 * Get {@link RedisHyperLogLogCommands}.
-	 *
-	 * @return never {@literal null}.
-	 * @since 2.0
-	 */
-	RedisHyperLogLogCommands hyperLogLogCommands();
+  /**
+   * Get {@link RedisHyperLogLogCommands}.
+   *
+   * @return never {@literal null}.
+   * @since 2.0
+   */
+  RedisHyperLogLogCommands hyperLogLogCommands();
 
-	/**
-	 * Get {@link RedisKeyCommands}.
-	 *
-	 * @return never {@literal null}.
-	 * @since 2.0
-	 */
-	RedisKeyCommands keyCommands();
+  /**
+   * Get {@link RedisKeyCommands}.
+   *
+   * @return never {@literal null}.
+   * @since 2.0
+   */
+  RedisKeyCommands keyCommands();
 
-	/**
-	 * Get {@link RedisListCommands}.
-	 *
-	 * @return never {@literal null}.
-	 * @since 2.0
-	 */
-	RedisListCommands listCommands();
+  /**
+   * Get {@link RedisListCommands}.
+   *
+   * @return never {@literal null}.
+   * @since 2.0
+   */
+  RedisListCommands listCommands();
 
-	/**
-	 * Get {@link RedisSetCommands}.
-	 *
-	 * @return never {@literal null}.
-	 * @since 2.0
-	 */
-	RedisSetCommands setCommands();
+  /**
+   * Get {@link RedisSetCommands}.
+   *
+   * @return never {@literal null}.
+   * @since 2.0
+   */
+  RedisSetCommands setCommands();
 
-	/**
-	 * Get {@link RedisScriptingCommands}.
-	 *
-	 * @return never {@literal null}.
-	 * @since 2.0
-	 */
-	RedisScriptingCommands scriptingCommands();
+  /**
+   * Get {@link RedisScriptingCommands}.
+   *
+   * @return never {@literal null}.
+   * @since 2.0
+   */
+  RedisScriptingCommands scriptingCommands();
 
-	/**
-	 * Get {@link RedisServerCommands}.
-	 *
-	 * @return never {@literal null}.
-	 * @since 2.0
-	 */
-	RedisServerCommands serverCommands();
+  /**
+   * Get {@link RedisServerCommands}.
+   *
+   * @return never {@literal null}.
+   * @since 2.0
+   */
+  RedisServerCommands serverCommands();
 
-	/**
-	 * Get {@link RedisStreamCommands}.
-	 *
-	 * @return never {@literal null}.
-	 * @since 2.2
-	 */
-	RedisStreamCommands streamCommands();
+  /**
+   * Get {@link RedisStreamCommands}.
+   *
+   * @return never {@literal null}.
+   * @since 2.2
+   */
+  RedisStreamCommands streamCommands();
 
-	/**
-	 * Get {@link RedisStringCommands}.
-	 *
-	 * @return never {@literal null}.
-	 * @since 2.0
-	 */
-	RedisStringCommands stringCommands();
+  /**
+   * Get {@link RedisStringCommands}.
+   *
+   * @return never {@literal null}.
+   * @since 2.0
+   */
+  RedisStringCommands stringCommands();
 
-	/**
-	 * Get {@link RedisZSetCommands}.
-	 *
-	 * @return never {@literal null}.
-	 * @since 2.0
-	 */
-	RedisZSetCommands zSetCommands();
+  /**
+   * Get {@link RedisZSetCommands}.
+   *
+   * @return never {@literal null}.
+   * @since 2.0
+   */
+  RedisZSetCommands zSetCommands();
 }

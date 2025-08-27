@@ -19,6 +19,4 @@ package org.springframework.data.redis.connection;
  * @author Christoph Strobl
  * @since 2.0
  */
-public interface ReactiveClusterNumberCommands extends ReactiveNumberCommands {
-
-}
+public interface ReactiveClusterNumberCommands extends ReactiveNumberCommands {}

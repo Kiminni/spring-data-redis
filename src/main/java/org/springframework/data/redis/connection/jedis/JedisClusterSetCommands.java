@@ -207,6 +207,44 @@ class JedisClusterSetCommands implements RedisSetCommands {
 	}
 
 	@Override
+	public Long sInterCard(byte[]... keys) {
+
+		Assert.notNull(keys, "Keys must not be null");
+		Assert.noNullElements(keys, "Keys must not contain null elements");
+
+		if (ClusterSlotHashUtil.isSameSlotForAllKeys(keys)) {
+			try {
+				return connection.getCluster().sintercard(keys);
+			} catch (Exception ex) {
+				throw convertJedisAccessException(ex);
+			}
+		}
+
+		// Fallback to computing intersection and returning cardinality
+		Set<byte[]> intersection = sInter(keys);
+		return (long) intersection.size();
+	}
+
+	@Override
+	public Long sInterCard(long limit, byte[]... keys) {
+
+		Assert.notNull(keys, "Keys must not be null");
+		Assert.noNullElements(keys, "Keys must not contain null elements");
+
+		if (ClusterSlotHashUtil.isSameSlotForAllKeys(keys)) {
+			try {
+				return connection.getCluster().sintercard((int) limit, keys);
+			} catch (Exception ex) {
+				throw convertJedisAccessException(ex);
+			}
+		}
+
+		// Fallback to computing intersection and returning cardinality
+		Set<byte[]> intersection = sInter(keys);
+		return Math.min((long) intersection.size(), limit);
+	}
+
+	@Override
 	public Long sInterStore(byte[] destKey, byte[]... keys) {
 
 		Assert.notNull(destKey, "Destination key must not be null");
